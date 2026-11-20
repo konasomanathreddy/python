@@ -1,0 +1,19 @@
+
+import random
+
+print("===== DICE SIMULATOR =====")
+
+while True:
+    choice = input("Press Enter to roll the dice or type 'exit': ")
+
+    if choice.lower() == "exit":
+        print("Game Over!")
+        break
+
+    dice = random.randint(1, 6)
+
+    print("Dice Result:", dice)
+
+    if dice == 6:
+        print("Congratulations! You got 6!")
+

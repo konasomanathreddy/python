@@ -1,0 +1,66 @@
+
+attendance = {}
+
+while True:
+    print("\n===== ATTENDANCE TRACKER =====")
+    print("1. Add Student")
+    print("2. Mark Attendance")
+    print("3. View Attendance")
+    print("4. Attendance Percentage")
+    print("5. Exit")
+
+    choice = input("Enter choice: ")
+
+    if choice == "1":
+        name = input("Enter student name: ")
+        if name not in attendance:
+            attendance[name] = []
+            print("Student added!")
+        else:
+            print("Student already exists!")
+
+    elif choice == "2":
+        name = input("Enter student name: ")
+
+        if name in attendance:
+            status = input("Enter P for Present or A for Absent: ")
+            status = status.upper()
+
+            if status in ["P", "A"]:
+                attendance[name].append(status)
+                print("Attendance marked!")
+            else:
+                print("Invalid attendance status!")
+        else:
+            print("Student not found!")
+
+    elif choice == "3":
+        for name, records in attendance.items():
+            print(name, ":", records)
+
+    elif choice == "4":
+        name = input("Enter student name: ")
+
+        if name in attendance:
+            records = attendance[name]
+            total = len(records)
+
+            if total > 0:
+                present = records.count("P")
+                percentage = (present / total) * 100
+
+                print("Student:", name)
+                print("Total Classes:", total)
+                print("Present:", present)
+                print("Attendance:", percentage, "%")
+            else:
+                print("No attendance records!")
+        else:
+            print("Student not found!")
+
+    elif choice == "5":
+        print("Attendance Tracker Closed!")
+        break
+
+    else:
+        print("Invalid choice!")

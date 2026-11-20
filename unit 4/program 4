@@ -1,0 +1,47 @@
+
+import json
+
+# Create sample log file
+logs = [
+    "INFO: System started",
+    "ERROR: Database connection failed",
+    "WARNING: Low memory",
+    "INFO: User logged in",
+    "ERROR: File not found",
+    "WARNING: High CPU usage",
+    "INFO: System stopped"
+]
+
+with open("application.log", "w") as file:
+    for log in logs:
+        file.write(log + "\n")
+
+# Analyze log file
+report = {
+    "INFO": 0,
+    "WARNING": 0,
+    "ERROR": 0
+}
+
+with open("application.log", "r") as file:
+    for line in file:
+        if line.startswith("INFO"):
+            report["INFO"] += 1
+
+        elif line.startswith("WARNING"):
+            report["WARNING"] += 1
+
+        elif line.startswith("ERROR"):
+            report["ERROR"] += 1
+
+# Save report as JSON
+with open("log_report.json", "w") as file:
+    json.dump(report, file, indent=4)
+
+# Display report
+print("===== LOG ANALYSIS REPORT =====")
+print("INFO Messages:", report["INFO"])
+print("WARNING Messages:", report["WARNING"])
+print("ERROR Messages:", report["ERROR"])
+
+print("\nJSON Report Generated Successfully!")

@@ -1,0 +1,37 @@
+
+import csv
+
+with open("payroll.csv", "w", newline="") as file:
+    writer = csv.writer(file)
+
+    writer.writerow([
+        "Employee ID",
+        "Name",
+        "Basic Salary",
+        "HRA",
+        "Net Salary"
+    ])
+
+    n = int(input("Enter number of employees: "))
+
+    for i in range(n):
+        emp_id = input("Enter Employee ID: ")
+        name = input("Enter Employee Name: ")
+        basic = float(input("Enter Basic Salary: "))
+
+        hra = basic * 0.20
+        deduction = basic * 0.10
+        net_salary = basic + hra - deduction
+
+        writer.writerow([
+            emp_id, name, basic, hra, net_salary
+        ])
+
+print("\n===== PAYROLL RECORDS =====")
+
+with open("payroll.csv", "r") as file:
+    reader = csv.reader(file)
+
+    for row in reader:
+        print(row)
+

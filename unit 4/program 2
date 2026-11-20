@@ -1,0 +1,53 @@
+
+while True:
+    print("\n===== STUDENT DATA MANAGER =====")
+    print("1. Add Student")
+    print("2. View Students")
+    print("3. Search Student")
+    print("4. Exit")
+
+    choice = input("Enter your choice: ")
+
+    if choice == "1":
+        name = input("Enter student name: ")
+        roll = input("Enter roll number: ")
+        course = input("Enter course: ")
+
+        with open("students.txt", "a") as file:
+            file.write(f"{roll},{name},{course}\n")
+
+        print("Student details saved!")
+
+    elif choice == "2":
+        try:
+            with open("students.txt", "r") as file:
+                print("\nStudent Records:")
+                print(file.read())
+        except FileNotFoundError:
+            print("No student records found!")
+
+    elif choice == "3":
+        search = input("Enter roll number: ")
+        found = False
+
+        try:
+            with open("students.txt", "r") as file:
+                for line in file:
+                    data = line.strip().split(",")
+
+                    if data[0] == search:
+                        print("Student Found:", data)
+                        found = True
+
+            if not found:
+                print("Student not found!")
+
+        except FileNotFoundError:
+            print("Student file not found!")
+
+    elif choice == "4":
+        print("Program closed!")
+        break
+
+    else:
+        print("Invalid choice!")
